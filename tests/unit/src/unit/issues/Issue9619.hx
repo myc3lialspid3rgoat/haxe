@@ -50,7 +50,7 @@ class ConcreteChildThatImplements extends AbstractThatImplementsInterface {
 abstract private class AbstractParent {
 	public function new():Void {}
 
-	abstract function abstractFunction():Void;
+	abstract public function abstractFunction():Bool;
 }
 
 private class ConcreteChild extends AbstractParent {
@@ -58,7 +58,9 @@ private class ConcreteChild extends AbstractParent {
 		super();
 	}
 
-	override function abstractFunction():Void {}
+	override public function abstractFunction():Bool {
+		return true;
+	}
 }
 
 class Issue9619 extends unit.Test {
@@ -74,6 +76,9 @@ class Issue9619 extends unit.Test {
 		var cc = new ConcreteChild();
 
 		t(HelperMacros.typeError(new AbstractParent()));
-		utest.Assert.pass();
+		t(cc.abstractFunction());
+
+		var ac:AbstractParent = cc;
+		t(ac.abstractFunction());
 	}
 }
