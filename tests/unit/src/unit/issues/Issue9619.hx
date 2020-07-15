@@ -47,6 +47,20 @@ class ConcreteChildThatImplements extends AbstractThatImplementsInterface {
 
 #end
 
+private interface InterfaceToBeImplementedNO {
+	function toBeImplemented():Bool;
+}
+
+abstract class AbstractThatImplementsInterfaceNO implements InterfaceToBeImplementedNO {
+	public function new() {}
+}
+
+class ConcreteChildThatImplementsNO extends AbstractThatImplementsInterfaceNO {
+	public override function toBeImplemented() {
+		return true;
+	}
+}
+
 abstract private class AbstractParent {
 	public function new():Void {}
 
@@ -80,5 +94,8 @@ class Issue9619 extends unit.Test {
 
 		var ac:AbstractParent = cc;
 		t(ac.abstractFunction());
+
+		var atiino:AbstractThatImplementsInterfaceNO = new ConcreteChildThatImplementsNO();
+		t(atiino.toBeImplemented());
 	}
 }
