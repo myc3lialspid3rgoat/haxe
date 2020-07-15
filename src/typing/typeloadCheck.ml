@@ -377,7 +377,7 @@ module Inheritance = struct
 						end
 			with
 				| Not_found when (has_class_flag c CAbstract) ->
-					let cf = {f with cf_name = f.cf_name} in
+					let cf = {f with cf_overloads = []} in
 					add_class_field_flag cf CfAbstract;
 					begin try
 						let cf' = PMap.find cf.cf_name c.cl_fields in
